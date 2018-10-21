@@ -10,7 +10,7 @@ namespace first_app
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("йоу Hello World!");
 
             // Keep the console window open in debug mode.
             Console.WriteLine("Press any key to exit.");
