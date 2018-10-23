@@ -1,7 +1,0 @@
-H:\Github\first_app\first_app\bin\Debug\first_app.exe.config
-H:\Github\first_app\first_app\bin\Debug\first_app.exe
-H:\Github\first_app\first_app\bin\Debug\first_app.pdb
-H:\Github\first_app\first_app\obj\Debug\first_app.csprojAssemblyReference.cache
-H:\Github\first_app\first_app\obj\Debug\first_app.csproj.CoreCompileInputs.cache
-H:\Github\first_app\first_app\obj\Debug\first_app.exe
-H:\Github\first_app\first_app\obj\Debug\first_app.pdb
