@@ -9,47 +9,32 @@ namespace DiscountСalculator
         public int DiscountValue { get; set; }
         public DateTime? StartSellDate { get; set; }
         public DateTime? EndSellDate { get; set; }
-        
-        public int CalculateDiscountPrice()
-        {
 
-            //переделано на IF + DiscountValue теперь хранит не % , а сумму скидки (унифицировано под все типы скидок)
-            if (     DiscountValue != 0 &&
-                    StartSellDate.HasValue &&
-                    EndSellDate.HasValue &&
-                    StartSellDate <= DateTime.UtcNow &&
-                    EndSellDate >= DateTime.UtcNow  )
-            {
-                return Price - DiscountValue;
-            }
-            else
-            {
-                return Price;
-            }
-
-
-
-            //return DiscountValue != 0 &&
-            //        StartSellDate.HasValue &&
-            //        EndSellDate.HasValue &&
-            //        StartSellDate <= DateTime.UtcNow &&
-            //        EndSellDate >= DateTime.UtcNow
-            //    ? Price - (Price * DiscountValue / 100)
-            //    : Price;
-        }
 
         public string GetSellInformation()
         {
-            if(DiscountValue != 0 && (StartSellDate.HasValue && EndSellDate.HasValue)
+            if(     DiscountValue == 0 ||                                                       //скидки нет
+                    (StartSellDate.HasValue && (StartSellDate > DateTime.UtcNow))  ||           //действие скидки еще не началось
+                    (EndSellDate.HasValue && (EndSellDate < DateTime.UtcNow)) )                 //действие скидки уже закончилось
             {
-                wtf
+                return "В настоящий момент на данный товар нет скидок."; 
             }
+            else 
+            {
+                int end_price = Price - DiscountValue;              //итоговая ценв
+
+                string end_string = "";                             //итоговая строка
+
+                //формируем итоговую строку
+                end_string += " На данный товар действует скидка " + DiscountValue.ToString() + "р. ";
+                if (StartSellDate.HasValue) end_string += " в период с " + StartSellDate.Value.ToShortDateString();
+                if (EndSellDate.HasValue) end_string += " по " + EndSellDate.Value.ToShortDateString() + ". ";
+                end_string += " Сумма с учётом скидки - " + end_price.ToString() + "р.";
 
 
-            return DiscountValue != 0 && StartSellDate.HasValue && EndSellDate.HasValue
-                ? $"На данный товар действует скидка {DiscountValue}% в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +
-                    $"Сумма с учётом скидки - {CalculateDiscountPrice()}р."
-                : "В настоящий момент на данный товар нет скидок.";
+                return end_string;
+                        
+            }
         }
     }        
 }

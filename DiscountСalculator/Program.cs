@@ -65,7 +65,7 @@ namespace DiscountСalculator
             product.DiscountValue = card_money_count;                               //записываем скидку в наш продукт
 
             Console.WriteLine("Введите дату окончания действия подарочной карты");
-            DateTime.TryParse(Console.ReadLine(), out DateTime end_card_date);
+            DateTime.TryParse(Console.ReadLine() + " 23:59:59", out DateTime end_card_date);
             product.EndSellDate = end_card_date;                                    //записываем дату окончания действия подарочной карты
         }
 
